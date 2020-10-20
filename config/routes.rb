@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, :controllers => { registrations: 'registrations'}
+
+  root to: "home#index"
+
+  resources :users do
+    resources :photos 
+  end
+
+  resources :photos do
+    resources :comments
+    resources :tags
+  end
+
+  resources :tags
 end
+

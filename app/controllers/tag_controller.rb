@@ -1,20 +1,20 @@
-class UserController < ApplicationController
+class TagController < ApplicationController
 
   def index
-    @users = User.all
+    @tags = Tag.all
     render :index
   end
 
   def new
-    @user = User.new
+    @tag = Tag.new
     render :new
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "User successfully posted!"
-      redirect_to users_path
+    @tag = Tag.new(tag_params)
+    if @tag.save
+      flash[:notice] = "Tag has been added!"
+      redirect_to photo_path
     else
       render :new
     end
@@ -47,9 +47,3 @@ class UserController < ApplicationController
     flash[:notice] = "User successfully destroyed!"
     redirect_to users_path
   end
-
-  private
-  def user_params
-    params.require(:user).permit(:content, :title)
-  end
-end
