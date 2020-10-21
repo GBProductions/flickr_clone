@@ -1,19 +1,16 @@
 Rails.application.routes.draw do
 
-  root to: "home#index"
+  root to: 'sessions#new'
 
-  devise_for :users, :controllers => { registrations: "registrations"}
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
 
+  get '/users/:id', to: 'users#show', as: 'user'
+  get '/users' => 'users#index'
 
-  resources :users do
-    resources :photos 
-  end
-
-  resources :photos do
-    resources :comments
-    resources :tags
-  end
-
-  resources :tags
+  get '/signin' => 'sessions#new'
+  post '/signin' => 'sessions#create'
+  get '/signout' => 'sessions#destroy'
 end
-
+ost '/signin' => 'sessions#create'
+  get '/signout' => 'sessions#destroy'
